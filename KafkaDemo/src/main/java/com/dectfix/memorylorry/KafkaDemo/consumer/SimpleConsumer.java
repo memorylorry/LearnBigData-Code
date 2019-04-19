@@ -1,4 +1,4 @@
-package com.dectfix.memorylorry.KafkaDemo.comsumer;
+package com.dectfix.memorylorry.KafkaDemo.consumer;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
@@ -21,8 +21,16 @@ public class SimpleConsumer {
         consumer.subscribe(Arrays.asList("test"));
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
-            for (ConsumerRecord<String, String> record : records)
-                System.out.printf("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+            for (ConsumerRecord<String, String> record : records) {
+                System.out.printf(
+                        "offset = %d, key = %s, value = %s,timestamp = %s %n",
+                        record.offset(),
+                        record.key(),
+                        record.value(),
+                        record.timestamp()
+                );
+            }
+
         }
     }
 
