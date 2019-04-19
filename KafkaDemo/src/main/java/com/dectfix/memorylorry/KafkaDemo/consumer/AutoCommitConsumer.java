@@ -10,10 +10,14 @@ import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
 
-public class SimpleConsumer {
+/**
+ * # Automatic Offset Committing
+ * This example demonstrates a simple usage of Kafka's consumer api that relies on automatic offset committing.
+ */
+public class AutoCommitConsumer {
     public static void main(String[] args) throws IOException {
         //读取conf中的配置，创建输入流
-        InputStream conf = SimpleConsumer.class.getClass().getResourceAsStream("/simple-kafka.properties");
+        InputStream conf = AutoCommitConsumer.class.getClass().getResourceAsStream("/autocommit-kafka.properties");
         Properties props = new Properties();
         props.load(conf);
 
