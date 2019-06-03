@@ -10,6 +10,7 @@
   <modules>
     <module>KafkaDemo</module>
     <module>conf</module>
+    <module>HadoopDemo</module>
   </modules>
 
   <name>LearnBigData-Code Maven Mojo</name>
@@ -37,8 +38,6 @@
         <artifactId>kafka-streams</artifactId>
         <version>${kafka.version}</version>
       </dependency>
-
-
     </dependencies>
   </dependencyManagement>
 
