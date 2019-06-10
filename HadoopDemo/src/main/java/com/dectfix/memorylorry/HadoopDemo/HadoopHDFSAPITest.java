@@ -2,6 +2,7 @@ package com.dectfix.memorylorry.HadoopDemo;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
+import org.apache.hadoop.fs.permission.FsPermission;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,6 +24,7 @@ public class HadoopHDFSAPITest
     FileSystem fs;
 
     String DIR_NAME = "/hc";
+    String FILE_NAME = "/hadoop_info";
 
     /**
      * 加载配置
@@ -61,19 +63,45 @@ public class HadoopHDFSAPITest
     }
 
     @Test
-    public void stat() throws IOException {
-        String p = "/hadoop_info";
-        FileStatus fileStatus = fs.getFileStatus(new Path(p));
+    public void file() throws IOException {
+        FileStatus fileStatus = fs.getFileStatus(new Path(FILE_NAME));
+
+        //获取文件长度
+        long size = fileStatus.getLen();
 
         //获取blockSize
         long blockSize = fileStatus.getBlockSize();
 
+        String owner = fileStatus.getOwner();
+
+        String group = fileStatus.getGroup();
+
+        short replica = fileStatus.getReplication();
+
+        FsPermission fsPermission = fileStatus.getPermission();
+
+        //Path symlink = fileStatus.getSymlink();//非链接文件不可用
+
+        Path name = fileStatus.getPath();
+
+        System.out.println(String.format("Name:%s  permission:%s  blockSize:%d  Size:%d  owner:%s  group:%s  replica:%d",name.toString(),fsPermission.toString(),blockSize,size,owner,group,replica));
+
+        // File Type (d|-|l)
+        fileStatus.isDirectory();
+        fileStatus.isFile();
+        fileStatus.isSymlink();
+    }
+
+    @Test
+    public void blk() throws IOException {
+        FileStatus fileStatus = fs.getFileStatus(new Path(FILE_NAME));
+
         //获取文件块信息
-        BlockLocation[] fileSystem = fs.getFileBlockLocations(fileStatus,0,fileStatus.getLen());
+        BlockLocation[] bls = fs.getFileBlockLocations(fileStatus,0,fileStatus.getLen());
 
         //获取每个block的起始偏移量
         String msg = "HOST:%s OFFSET：%s LEN:%s NAME：%s";
-        for(BlockLocation bl:fileSystem){
+        for(BlockLocation bl:bls){
             System.out.println(String.format(msg,
                     Arrays.asList(bl.getHosts()).toString(),
                     bl.getOffset(),
