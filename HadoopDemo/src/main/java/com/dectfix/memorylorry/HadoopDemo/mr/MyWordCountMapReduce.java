@@ -25,9 +25,8 @@ public class MyWordCountMapReduce {
         // Specify various job-specific parameters
         job.setJobName("MyWordCountMapReduce");
 
-//        job.setInputPath(new Path("in"));
-//        job.setOutputPath(new Path("out"));
         FileInputFormat.addInputPath(job,new Path(INPUT_PATH));
+
         Path output = new Path(OUTPUT_PATH);
         FileOutputFormat.setOutputPath(job,output);
 
@@ -47,6 +46,3 @@ public class MyWordCountMapReduce {
     }
 
 }
-
-
-
