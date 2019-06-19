@@ -11,6 +11,7 @@
     <module>KafkaDemo</module>
     <module>conf</module>
     <module>HadoopDemo</module>
+      <module>HbaseDemo</module>
   </modules>
 
   <name>LearnBigData-Code Maven Mojo</name>
