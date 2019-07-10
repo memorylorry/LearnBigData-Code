@@ -13,6 +13,7 @@
     <module>HadoopDemo</module>
       <module>HbaseDemo</module>
       <module>Basic</module>
+      <module>ZookeeperDemo</module>
   </modules>
 
   <name>LearnBigData-Code Maven Mojo</name>
